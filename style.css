@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Roboto+Mono:wght@300;400;500&display=swap");
+
+      :root {
+        --primary: #10b981;
+        --secondary: #3b82f6;
+        --dark: #1e293b;
+        --light: #f8fafc;
+      }
+
+      body {
+        font-family: "Roboto Mono", monospace;
+        background-color: var(--dark);
+        color: var(--light);
+        transition: all 0.3s ease;
+      }
+
+      .matrix-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.1;
+        overflow: hidden;
+      }
+
+      .matrix-char {
+        color: var(--primary);
+        text-shadow: 0 0 5px var(--primary);
+        animation: fall linear;
+        position: absolute;
+        font-family: "Major Mono Display", monospace;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+
+      .password-char {
+        display: inline-block;
+        transition: all 0.3s ease;
+      }
+
+      .password-char.generating {
+        color: var(--primary);
+        animation: pulse 0.5s infinite alternate;
+      }
+
+      .password-char.validated {
+        color: var(--light);
+        transform: scale(1.1);
+      }
+
+      @keyframes pulse {
+        from {
+          opacity: 0.3;
+          text-shadow: 0 0 2px var(--primary);
+        }
+        to {
+          opacity: 1;
+          text-shadow: 0 0 10px var(--primary);
+        }
+      }
+
+      .progress-bar {
+        height: 4px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+      }
+
+      .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        background-color: var(--dark);
+        color: var(--light);
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -100px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        border: 1px solid var(--primary);
+        font-size: 0.8rem;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .language-switch {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 10;
+      }
+
+      .language-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: var(--light);
+        padding: 5px 10px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.8rem;
+      }
+
+      .language-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .language-btn.active {
+        background: var(--primary);
+        color: var(--dark);
+      }
+
+      .strength-meter {
+        height: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+
+      .strength-fill {
+        height: 100%;
+        transition: width 0.5s ease, background-color 0.5s ease;
+      }
+
+      .copy-btn {
+        transition: all 0.3s ease;
+      }
+
+      .copy-btn:hover {
+        transform: scale(1.1);
+      }
+
+      .copy-btn.copied {
+        color: var(--primary);
+      }

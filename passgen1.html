@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Generate secure passwords with our advanced password generator. Create strong, random passwords with custom length and complexity requirements."
+    />
+    <meta
+      name="keywords"
+      content="password generator, secure password, random password, online password generator"
+    />
+    <meta property="og:description" content="Pona Ekolo, Christ ND" />
+    <meta property="og:url" content="https://ndsec24.tech/" />
+    <title>PE-Pass v2 - Advanced Password Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <div class="language-switch">
+      <button class="language-btn active" id="enBtn">EN</button>
+      <button class="language-btn" id="frBtn">FR</button>
+    </div>
+
+    <div
+      class="min-h-screen flex flex-col items-center justify-center px-4 py-12"
+    >
+      <div
+        class="w-full max-w-md bg-slate-800 bg-opacity-50 backdrop-blur-md rounded-xl shadow-lg overflow-hidden border border-slate-700 p-8"
+      >
+        <div class="text-center mb-8">
+          <h1
+            class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400 mb-2"
+            id="title"
+          >
+            PE-Pass v2 Generator
+          </h1>
+          <p class="text-slate-300 text-sm" id="subtitle">
+            Create ultra-secure passwords with advanced encryption
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex justify-between items-center mb-2">
+            <label
+              for="passwordLength"
+              class="block text-sm font-medium text-slate-300"
+              id="lengthLabel"
+              >Password Length</label
+            >
+            <span class="text-sm font-mono text-emerald-400" id="lengthValue"
+              >12</span
+            >
+          </div>
+          <input
+            type="range"
+            id="passwordLength"
+            min="4"
+            max="32"
+            value="12"
+            class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer"
+          />
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              id="uppercase"
+              checked
+              class="w-4 h-4 text-emerald-400 bg-slate-700 border-slate-600 rounded focus:ring-emerald-400"
+            />
+            <label
+              for="uppercase"
+              class="ml-2 text-sm text-slate-300"
+              id="uppercaseLabel"
+              >Uppercase (A-Z)</label
+            >
+          </div>
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              id="lowercase"
+              checked
+              class="w-4 h-4 text-emerald-400 bg-slate-700 border-slate-600 rounded focus:ring-emerald-400"
+            />
+            <label
+              for="lowercase"
+              class="ml-2 text-sm text-slate-300"
+              id="lowercaseLabel"
+              >Lowercase (a-z)</label
+            >
+          </div>
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              id="numbers"
+              checked
+              class="w-4 h-4 text-emerald-400 bg-slate-700 border-slate-600 rounded focus:ring-emerald-400"
+            />
+            <label
+              for="numbers"
+              class="ml-2 text-sm text-slate-300"
+              id="numbersLabel"
+              >Numbers (0-9)</label
+            >
+          </div>
+          <div class="flex items-center">
+            <input
+              type="checkbox"
+              id="symbols"
+              checked
+              class="w-4 h-4 text-emerald-400 bg-slate-700 border-slate-600 rounded focus:ring-emerald-400"
+            />
+            <label
+              for="symbols"
+              class="ml-2 text-sm text-slate-300"
+              id="symbolsLabel"
+              >Symbols (!@#$%)</label
+            >
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <div class="flex justify-between items-center mb-1">
+            <span class="text-sm font-medium text-slate-300" id="strengthLabel"
+              >Password Strength</span
+            >
+            <span class="text-xs font-mono" id="strengthText">Strong</span>
+          </div>
+          <div class="strength-meter">
+            <div
+              class="strength-fill"
+              id="strengthFill"
+              style="width: 75%; background-color: #10b981"
+            ></div>
+          </div>
+        </div>
+
+        <div class="relative mb-6">
+          <div
+            class="flex items-center justify-between bg-slate-800 rounded-lg p-4 border border-slate-700"
+          >
+            <div
+              class="font-mono text-lg tracking-wider overflow-x-auto whitespace-nowrap pr-4"
+              id="passwordDisplay"
+            ></div>
+            <button
+              class="copy-btn text-slate-400 hover:text-emerald-400"
+              id="copyBtn"
+              title="Copy to clipboard"
+            >
+              <i class="fas fa-copy"></i>
+            </button>
+          </div>
+          <div class="progress-bar mt-2">
+            <div
+              class="progress-fill"
+              id="progressFill"
+              style="width: 0%"
+            ></div>
+          </div>
+        </div>
+
+        <div class="flex space-x-4">
+          <button
+            id="generateBtn"
+            class="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-900 font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center"
+          >
+            <i class="fas fa-key mr-2"></i>
+            <span id="generateText">Generate Password</span>
+          </button>
+          <button
+            id="advancedBtn"
+            class="bg-slate-700 hover:bg-slate-600 text-slate-300 font-bold py-3 px-4 rounded-lg transition-all duration-300 tooltip"
+          >
+            <i class="fas fa-cog"></i>
+            <span class="tooltiptext" id="advancedTooltip"
+              >Advanced Options</span
+            >
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="mt-8 text-center text-slate-400 text-xs max-w-md"
+        id="footerText"
+      >
+        <p>
+          Your generated passwords are created locally in your browser and never
+          sent over the internet.
+        </p>
+        <p class="mt-2">
+          For maximum security, use a password manager to store your passwords.
+        </p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
